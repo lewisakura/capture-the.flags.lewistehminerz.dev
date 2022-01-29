@@ -121,7 +121,7 @@
 					</div>
 					<div class="text">
 						<h1>Hi, {data.username}!</h1>
-						<h4>Please complete the following form, and you can get on your way.</h4>
+						<h4>Here's a few questions for you. Thanks for helping to contribute to our CTF!</h4>
 					</div>
 				</div>
 			</Column>
