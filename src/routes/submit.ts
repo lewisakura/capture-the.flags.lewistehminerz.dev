@@ -49,6 +49,7 @@ export async function post(e: RequestEvent): Promise<EndpointOutput> {
 		if (['Desktop', 'Web', 'iOS', 'Android'].includes(platform)) sanitizedPlatforms.push(platform);
 	}
 
+	// capture the flags uses a webhook to gather responses and to act as a form of "backup" in case airtable fails
 	await fetch(webhookUrl, {
 		method: 'POST',
 		body: JSON.stringify({
@@ -84,6 +85,7 @@ export async function post(e: RequestEvent): Promise<EndpointOutput> {
 		}
 	});
 
+	// then we actually submit the responses to airtable for easier processing
 	await base('Responses').create({
 		id: formData.anonymity ? 'anonymous' : body.userId,
 		flags: body.flags.toString(),
