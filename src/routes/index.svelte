@@ -14,7 +14,8 @@
 		Column,
 		Button,
 		InlineLoading,
-		MultiSelect
+		MultiSelect,
+		NumberInput
 	} from 'carbon-components-svelte';
 
 	import { unzip } from 'unzipit';
@@ -28,6 +29,9 @@
 
 	async function submit(e) {
 		e.preventDefault();
+
+		if (flagNum === null) return; // dont do anything if there isnt any flags!
+
 		state = 'loading';
 
 		const formData = new FormData(e.target);
@@ -146,9 +150,6 @@
 								on:delete={reset}
 							/>
 						{/if}
-						{#if flagNum !== null}
-							<p>That makes your flags <code>{flagNum}</code>. Nice!</p>
-						{/if}
 						<InlineNotification
 							lowContrast
 							hideCloseButton
@@ -164,6 +165,17 @@
 								upload the package.
 							</svelte:fragment>
 						</InlineNotification>
+						<p>
+							If that scared you away from uploading your package (which is completely
+							understandable), you can type in your flags manually here:
+						</p>
+						<NumberInput
+							label="Flags"
+							bind:value={flagNum}
+							readonly={fileName !== null}
+							allowEmpty
+							hideSteppers
+						/>
 					</FormGroup>
 					<FormGroup legendText="Mini questionnaire">
 						<p>
@@ -213,7 +225,7 @@
 						<Checkbox name="anonymity" labelText="I want to remain anonymous" />
 					</FormGroup>
 					{#if state === 'waiting'}
-						<Button type="submit" disabled={fileName === null || invalidFile}>Submit</Button>
+						<Button type="submit" disabled={flagNum === null}>Submit</Button>
 					{:else}
 						<InlineLoading
 							status={state === 'loading' ? 'active' : state === 'success' ? 'finished' : 'error'}
