@@ -184,8 +184,10 @@
 						</p>
 						<br />
 						<MultiSelect
+							type="inline"
+							titleText="Platforms used"
 							name="platformsUsed"
-							label="Select your used platforms..."
+							label="Select every platform you've used"
 							items={[
 								{ id: 'Desktop', text: 'Desktop' },
 								{ id: 'Web', text: 'Web' },
