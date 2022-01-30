@@ -15,13 +15,14 @@
 		Button,
 		InlineLoading,
 		MultiSelect,
-		NumberInput
+		NumberInput,
+		TextInput
 	} from 'carbon-components-svelte';
 
 	import { unzip } from 'unzipit';
 
 	let userId: string;
-	let flagNum: number = null;
+	let flagNum: string = null;
 
 	let selectedPlatforms: string[] = [];
 
@@ -98,7 +99,7 @@
 			const userJson = JSON.parse(
 				await (await unzipped.entries['account/user.json'].blob()).text()
 			);
-			flagNum = userJson.flags;
+			flagNum = userJson.flags.toString();
 		} catch (e) {
 			invalidFile = true;
 			fileStatus = 'edit';
@@ -169,12 +170,12 @@
 							If that scared you away from uploading your package (which is completely
 							understandable), you can type in your flags manually here:
 						</p>
-						<NumberInput
-							label="Flags"
+						<TextInput
+							labelText="Flags"
 							bind:value={flagNum}
 							readonly={fileName !== null}
-							allowEmpty
-							hideSteppers
+							invalid={isNaN(parseInt(flagNum))}
+							invalidText="Invalid flags"
 						/>
 					</FormGroup>
 					<FormGroup legendText="Mini questionnaire">

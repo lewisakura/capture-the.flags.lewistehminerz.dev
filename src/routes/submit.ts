@@ -28,6 +28,9 @@ export async function post(e: RequestEvent): Promise<EndpointOutput> {
 	if (!e.locals.session.data?.token) return { status: 400 };
 
 	const body = await e.request.json();
+
+	body.flags = BigInt(body.flags);
+
 	const formData = body.form;
 	console.log(formData);
 
