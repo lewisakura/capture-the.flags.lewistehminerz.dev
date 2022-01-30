@@ -15,6 +15,7 @@ const formMap = {
 	hasAlts: 'User has alternative accounts',
 	hasBeenWarned: 'User has been warned',
 	hasSystemMessage: 'User has had a system message',
+	markedSuspicious: 'User has been marked suspicious',
 	usedZendesk: 'User has used Zendesk',
 	botApplication: 'User has created a bot application',
 	verifiedEmail: 'User has verified their e-mail',
